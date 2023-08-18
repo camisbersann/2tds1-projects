@@ -53,6 +53,8 @@ class ProductsService{
     }
 }
 
+
+
 const categoriesList = new CategoryService();
 
 function createCategory(){
@@ -65,7 +67,8 @@ function createCategory(){
     categoriesList.addCategory(categoryName2);
     categoriesList.addCategory(categoryName3);
 
-     console.log(categoriesList.categories);
+    //  console.log(categoriesList.categories);
+    console.log("Categorias criadas");
 }
 
 const productsList = new ProductsService();
@@ -79,5 +82,11 @@ function createProduct(){
 
     // console.log(productsList.products);
 
+}
+
+function findCategory(id){
+    const category = categoriesList.getCategoryById(id);
+
+    console.log(category.name);
 }
 
