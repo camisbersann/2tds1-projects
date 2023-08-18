@@ -7,5 +7,61 @@
     font-family: "Popins", sans-serif;
 }
 
-/*feat: create and reset CSS */
+body{
+    background-color: #f4f4f4;
+}
+
+#container{
+    max-width: 50rem; /*800*/
+    margin: 0 auto;
+    background-color: #ffff;
+    padding: 1.25rem; /*20px*/
+    border-radius: 6px;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 1.25rem; /*20px*/
+}
+
+h2{
+    margin-top: 1.25rem;
+}
+
+.form-container{
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+.form-container label{
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.form-container input{
+    width: 100%;
+    padding: 0.625rem;
+    margin-bottom: 0.625rem;
+    border:1px solid #ccc;
+    border-radius: 3px;
+}
+
+.btn{
+    background-color: #fd1b1b;
+    color: #ffff;
+    padding: 0.625rem 1.25rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover{
+    background-color: #e60e0e;
+    transform: scale(1.05);
+}
 
