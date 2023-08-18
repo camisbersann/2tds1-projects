@@ -79,7 +79,7 @@ function createCategory(){
     categoriesList.addCategory(categoryName);
 
     cleanFields();
-    
+
     console.log(categoriesList.categories);
     // console.log("Categorias criadas");
 }
@@ -133,6 +133,6 @@ function findProduct(id){
 
 
 function cleanFields(){
-    document.getElementById("categoryNameInput").value ="";
+    document.getElementById("categoryNameInput").value = "";
 }
 
