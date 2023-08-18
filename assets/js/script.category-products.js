@@ -108,4 +108,8 @@ function editCategory(id, name){
     console.log(categoriesList.categories);
 }
 
+function deleteCategory(id){
+    categoriesList.deleteCategory(id);
 
+    console.log(categoriesList.categories);
+}
