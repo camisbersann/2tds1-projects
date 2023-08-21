@@ -1,6 +1,6 @@
 class User{
-    constructor(fullname, email, birthdate, city, cellphone, cpf, age, sign){
-        this.fullname = fullname;
+    constructor(name, email, birthdate, city, cellphone, cpf, age, sign){
+        this.name = name;
         this.email= email;
         this.birthdate= birthdate;
         this.city= city;
@@ -79,29 +79,21 @@ function createUser(){
     
     list.add(person);
 
+    clearInputs();
+
     showUsers();
 
 }
 
-function showUsers(){
-    let html = "";
+function clearInputs(){
+    document.getElementById("name").value= "";
+    document.getElementById("email").value= "";
+    document.getElementById("birthdate").value= "";
+    document.getElementById("address").value= "";
+    document.getElementById("phone").value= "";
+    document.getElementById("cpf").value= "";
 
-    list.users.forEach(user =>{
-        html += `
-        <div>
-            <p>Nome: ${user.name}</p>
-            <p>Email: ${user.email}</p>
-            <p>Data de Nascimento: ${user.birthdate}</p>
-            <p>Cidade: ${user.city}</p>
-            <p>Telefone: ${user.cellphone}</p>
-            <p>CPF: ${user.cpf}</p>
 
-        
-        </div>
-        `
-    });
-
-    document.getElementById("success-msg").innerHTML = html
 }
 
 
