@@ -103,18 +103,19 @@ function createUser(){
 
     const person = new User(name, email, birthdate, city, cellphone, cpf);
     
-    list.add(person);
-    tenhousuarios = true;
-
-    clearInputs();
-    formatedCPF(cpf);
-    formatedCellphone(cellphone);
-    valida_cpf(cpf);
-    showUsers();
-    showRegister();
-    sendErrorMsg(msg);
-    sendsuccessMsg(msg);
-
+    if (!isAnyInputEmpty()) {
+      sendErrorMsg ('Preencha todos os campos');
+    }else if(!valida_cpf(cpf)){
+        sendErrorMsg('CPF inválido');
+        document.getElementById("cpf").value="";
+    }else if(isUserAlreadyRegistered(cpf)){
+        sendErrorMsg;('Este CPF já está cadastrado');
+    }else{
+        list.add(person);
+        sendsuccessMsg('Parabéns, você está na lista de espera');
+        clearInputs();
+        thereIsUsers = true;
+    }
 }
 
 function showUsers(){
@@ -129,7 +130,31 @@ function showUsers(){
 }
 
 function isAnyInputEmpty(){
-    if()
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const birthdate = document.getElementById("birthdate").value;
+    const city = document.getElementById("address").value;
+    const cellphone = document.getElementById("phone").value;
+    const cpf = document.getElementById("cpf").value;
+
+    if(name && email && birthdate && city && cellphone  && cpf){
+        return true ;
+    }else{
+        return false;
+      
+    }
+}
+
+function isUserAlreadyRegistered(cpf){
+    let isregistered = false;
+
+    list.users.forEach(user =>{
+        if(user.cpf == cpf){
+            isregistered = true;
+        }
+    });
+
+    return isregistered;
 }
 
 function clearInputs(){
