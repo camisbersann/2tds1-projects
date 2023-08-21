@@ -83,7 +83,7 @@ class ListUser{
     }
 
     countUsers(){
-        
+        this.users.length();
     }
 
 }
