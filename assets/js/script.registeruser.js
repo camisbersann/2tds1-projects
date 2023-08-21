@@ -1,3 +1,5 @@
+let thereIsUsers = false
+
 class User{
     constructor(name, email, birthdate, city, cellphone, cpf){
         this.name = name;
@@ -102,13 +104,33 @@ function createUser(){
     const person = new User(name, email, birthdate, city, cellphone, cpf);
     
     list.add(person);
+    tenhousuarios = true;
 
     clearInputs();
     formatedCPF(cpf);
+    formatedCellphone(cellphone);
+    valida_cpf(cpf);
     showUsers();
+    showRegister();
+    sendErrorMsg(msg);
+    sendsuccessMsg(msg);
 
 }
 
+function showUsers(){
+
+    if(thereIsUsers){
+        document.getElementById("sub-div").classList.remove("hidden");
+    document.getElementById("title-page").classList.add("hidden");
+    document.getElementById("main-div").classList.add("hidden");
+    }else{
+        sendErrorMsg("Não temos nenhum usuário cadastrado")
+    }
+}
+
+function isAnyInputEmpty(){
+    if()
+}
 
 function clearInputs(){
     document.getElementById("name").value= "";
