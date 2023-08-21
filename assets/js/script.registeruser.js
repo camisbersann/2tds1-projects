@@ -1,23 +1,14 @@
 class User{
-    constructor(name, email, birthdate, city, cellphone, cpf, age, sign){
+    constructor(name, email, birthdate, city, cellphone, cpf){
         this.name = name;
         this.email= email;
         this.birthdate= birthdate;
         this.city= city;
         this.cellphone = cellphone;
         this.cpf = cpf;
-        this.age = age;
-        this.sign = sign;
-    }
-}
-
-class ListUser{
-    constructor(){
-        this.users= [];
-    }
-
-    add(user){
-        this.users.push(user);
+        this.age = this.calculateAge();
+        this.sign = this.getZodiacSign();
+        this.clients = this.isPossibleClient();
     }
 
     getZodiacSign() {
@@ -53,15 +44,48 @@ class ListUser{
         }
     }
 
-    // calculateAge(){
-    //     this.age.forEach(age =>{
-    //         if(age < 18 || age > 31){
-    //             return "Você não é um possivel cliente"
-    //         }else{
-    //             return "Você é um possível cliente"
-    //         }
-    //     });
-    // }
+    calculateAge(){
+        const birthDate = document.getElementById("birthdate");
+        const personYear = new Date(birthDate).getFullYear();
+        const todayYear = new Date().getFullYear();
+        const personMonth = new Date(birthDate).getMonth();
+        const todayMonth = new Date(birthDate).getMonth() +1;
+
+        const ageYear= todayYear - personYear;
+
+        if(personMonth > todayMonth){
+            return ageYear -1;
+        }else{
+            return ageYear;
+        }
+    }
+
+    isPossibleClient(){ 
+        if(this.age >= 18 && this.age <=31){
+            return "Sim ✅";
+        } else{
+            return "Não ❌";
+        }
+    }
+}
+
+class ListUser{
+    constructor(){
+        this.users= [];
+    }
+
+    add(user){
+        this.users.push(user);
+    }
+
+    getAllUsers(){
+        return this.users;
+    }
+
+    countUsers(){
+        
+    }
+
 }
 
 const list = new ListUser();
@@ -80,10 +104,11 @@ function createUser(){
     list.add(person);
 
     clearInputs();
-
+    formatedCPF(cpf);
     showUsers();
 
 }
+
 
 function clearInputs(){
     document.getElementById("name").value= "";
@@ -169,6 +194,16 @@ function sendErrorMsg(msg) {
     document.getElementById("error-msg").classList.remove("hidden");
     setTimeout(function () {
         document.getElementById("error-msg").classList.add("hidden");
+    }, 4000);
+}
+
+function sendsuccessMsg(msg){
+    console.log("Passou pela funcao sendsuccessMsg()");
+
+    document.getElementById("success-msg").innerHTML = msg;
+    document.getElementById("success-msg").classList.remove("hidden");
+    setTimeout(function () {
+        document.getElementById("success-msg").classList.add("hidden");
     }, 4000);
 }
 
