@@ -52,8 +52,57 @@ class ListUser{
             return "Sagitário ♐";
         }
     }
+
+    // calculateAge(){
+    //     this.age.forEach(age =>{
+    //         if(age < 18 || age > 31){
+    //             return "Você não é um possivel cliente"
+    //         }else{
+    //             return "Você é um possível cliente"
+    //         }
+    //     });
+    // }
 }
 
+const list = new ListUser();
+
+
+function createUser(){
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const birthdate = document.getElementById("birthdate").value;
+    const city = document.getElementById("address").value;
+    const cellphone = document.getElementById("phone").value;
+    const cpf = document.getElementById("cpf").value;
+
+    const person = new User(name, email, birthdate, city, cellphone, cpf);
+    
+    list.add(person);
+
+    showUsers();
+
+}
+
+function showUsers(){
+    let html = "";
+
+    list.users.forEach(user =>{
+        html += `
+        <div>
+            <p>Nome: ${user.name}</p>
+            <p>Email: ${user.email}</p>
+            <p>Data de Nascimento: ${user.birthdate}</p>
+            <p>Cidade: ${user.city}</p>
+            <p>Telefone: ${user.cellphone}</p>
+            <p>CPF: ${user.cpf}</p>
+
+        
+        </div>
+        `
+    });
+
+    document.getElementById("success-msg").innerHTML = html
+}
 
 
 
