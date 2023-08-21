@@ -69,12 +69,6 @@ class User{
             return "Não ❌";
         }
     }
-
-    convertDatetoBR() {
-        let dateBR = this.birthdate.split('-')
-        dateBR.reverse()
-        return dateBR.join('/')
-    }
 }
 
 class ListUser{
@@ -83,7 +77,20 @@ class ListUser{
     }
 
     add(user){
-        this.users.push(user);
+        if (!isAnyInputEmpty()) {
+            sendErrorMsg ('Preencha todos os campos');
+          }else if(!valida_cpf(user.cpf)){
+              sendErrorMsg('CPF inválido');
+              document.getElementById("cpf").value="";
+          }else if (isUserAlreadyRegistered(user.cpf)) {
+              sendErrorMsg('Este CPF já está cadastrado');
+          }else{
+              sendsuccessMsg('Parabéns, você está na lista de espera');
+              clearInputs();
+              thereIsUsers = true;
+              this.users.push(user);
+              registerUser()
+          }
     }
 
     getAllUsers(){
@@ -98,6 +105,11 @@ class ListUser{
 
 const list = new ListUser();
 
+function dateinPTBR(date){
+    let dateBR = date.split('-')
+        dateBR.reverse()
+        return dateBR.join('/')
+}
 
 function createUser(){
     const name = document.getElementById("name").value;
@@ -107,24 +119,12 @@ function createUser(){
     const cellphone = document.getElementById("phone").value;
     const cpf = document.getElementById("cpf").value;
 
-    const person = new User(name, email, birthdate, city, cellphone, cpf);
+    const user = new User(name, email, birthdate, city, cellphone, cpf);
     
-    if (!isAnyInputEmpty()) {
-      sendErrorMsg ('Preencha todos os campos');
-    }else if(!valida_cpf(cpf)){
-        sendErrorMsg('CPF inválido');
-        document.getElementById("cpf").value="";
-    }else if (isUserAlreadyRegistered(cpf)) {
-        sendErrorMsg('Este CPF já está cadastrado');
-    }else{
-        list.add(person);
-        sendsuccessMsg('Parabéns, você está na lista de espera');
-        clearInputs();
-        thereIsUsers = true;
-        registerUser();
-    }
+    list.add(user);
     console.log(isUserAlreadyRegistered(cpf));
 }
+
 
 function registerUser(){
     let html = '';
@@ -136,7 +136,7 @@ function registerUser(){
             <p><strong>Idade: </strong>${register.age}</p>
             <p><strong>Signo: </strong>${register.sign}</p>
             <p><strong>Email: </strong>${register.email}</p>
-            <p><strong>Data de Nascimento: </strong>${register.convertDatetoBR()}</p>
+            <p><strong>Data de Nascimento: </strong>${dateinPTBR(register.birthdate)}</p>
             <p><strong>Cidade: </strong>${register.city}</p>
             <p><strong>Telefone: </strong>${register.cellphone}</p>
             <p><strong>CPF: </strong>${register.cpf}</p>
