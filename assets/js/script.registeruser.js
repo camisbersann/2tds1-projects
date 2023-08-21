@@ -47,7 +47,7 @@ class User{
     }
 
     calculateAge(){
-        const birthDate = document.getElementById("birthdate");
+        const birthDate = this.birthdate;
         const personYear = new Date(birthDate).getFullYear();
         const todayYear = new Date().getFullYear();
         const personMonth = new Date(birthDate).getMonth();
@@ -69,6 +69,12 @@ class User{
             return "Não ❌";
         }
     }
+
+    convertDatetoBR() {
+        let dateBR = this.birthdate.split('-')
+        dateBR.reverse()
+        return dateBR.join('/')
+    }
 }
 
 class ListUser{
@@ -85,7 +91,7 @@ class ListUser{
     }
 
     countUsers(){
-        this.users.length();
+      return this.users.length;
     }
 
 }
@@ -108,16 +114,43 @@ function createUser(){
     }else if(!valida_cpf(cpf)){
         sendErrorMsg('CPF inválido');
         document.getElementById("cpf").value="";
-    }else if(isUserAlreadyRegistered(cpf)){
-        sendErrorMsg;('Este CPF já está cadastrado');
+    }else if (isUserAlreadyRegistered(cpf)) {
+        sendErrorMsg('Este CPF já está cadastrado');
     }else{
         list.add(person);
         sendsuccessMsg('Parabéns, você está na lista de espera');
         clearInputs();
         thereIsUsers = true;
+        registerUser();
     }
+    console.log(isUserAlreadyRegistered(cpf));
 }
 
+function registerUser(){
+    let html = '';
+
+    list.users.forEach(register =>{
+        html += `
+        <div class="list-eachUser">
+            <p><strong>Nome: </strong>${register.name}</p>
+            <p><strong>Idade: </strong>${register.age}</p>
+            <p><strong>Signo: </strong>${register.sign}</p>
+            <p><strong>Email: </strong>${register.email}</p>
+            <p><strong>Data de Nascimento: </strong>${register.convertDatetoBR()}</p>
+            <p><strong>Cidade: </strong>${register.city}</p>
+            <p><strong>Telefone: </strong>${register.cellphone}</p>
+            <p><strong>CPF: </strong>${register.cpf}</p>
+            <p><strong>É um possível cliente?: </strong>${register.clients}</p>
+        
+        
+        </div>
+        `
+    });
+    document.getElementById("user-list").innerHTML = html;
+    document.getElementById("contador").innerHTML = `Contador: ${list.countUsers()}`;
+
+
+}
 function showUsers(){
 
     if(thereIsUsers){
