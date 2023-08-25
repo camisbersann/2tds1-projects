@@ -44,7 +44,8 @@ function envieMsg(msg, tipoMgs){
 }
 
 class Jogo{
-    constructor(titulo, preco, descricao, plataforma, imgLink){
+    constructor(id, titulo, preco, descricao, plataforma, imgLink){
+        this.id = id;
         this.titulo = titulo;
         this.preco= preco;
         this.descricao= descricao;
@@ -58,21 +59,22 @@ class Jogo{
 // console.log(jogoTeste);
 
 function comporJogo(){
+    let id = gerarId();
     let titulo = document.getElementById("input-titulo").value;
     let preco = document.getElementById("input-preco").value;
     let descricao = document.getElementById("input-descricao").value;
     let plataforma = document.getElementById("input-plataforma").value;
     let imgLink = document.getElementById("input-imgLink").value;
 
-    const jogo = new Jogo(titulo, preco, descricao, plataforma, imgLink);
+    const jogo = new Jogo(id,titulo, preco, descricao, plataforma, imgLink);
 
     console.log(jogo);
 
     bibliotecaJogos.adicionar(jogo);
     console.log(bibliotecaJogos);
 
+   
     renderizarConteudo();
-
    
 }
 
@@ -88,6 +90,12 @@ class ListaJogos{
         } 
     
     }
+
+    deletar(id){
+        this.listaJogosArray = this.listaJogosArray.filter(task => (task.id != id));
+    }
+
+   
 }
 
 // const listaTeste = new ListaJogos();
@@ -121,6 +129,7 @@ function renderizarConteudo(){
                 <p>Preço: ${jogo.preco}</p>
                 <p>Descrição: ${jogo.descricao}</p>
                 <p>Plataforma: ${jogo.plataforma}</p>
+                <button class="button" onclick="remover(${jogo.id})">🗑</button>
             </div>
         `;
 
@@ -135,4 +144,13 @@ function isURLValida(url) {
     } else {
         return false;
     }
+}
+
+function remover(id){
+    bibliotecaJogos.deletar(id);
+    renderizarConteudo();
+}
+
+function gerarId(){
+    return Math.floor(Math.random()*9999)
 }
