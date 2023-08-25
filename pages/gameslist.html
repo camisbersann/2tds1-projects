@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Jogos</title>
+    <script src="../assets/js/script.gameslist.js"></script>
+    <link rel="stylesheet" href="../assets/css/styles.gameslist.css">
+</head>
+<body>
+
+    <div id="conteiner-principal">
+        <h2 id="titulo-principal">Cadastrar Jogos</h2>
+
+        <div id="conteiner-inputs">
+            <label for="input-titulo">Título</label>
+            <input type="text" id="input-titulo" name="input-titulo" class="inputs">
+
+            <label for="input-preco">Preço</label>
+            <input type="number" id="input-preco" name="input-preco" class="inputs">
+
+            <label for="input-descricao">Descrição</label>
+            <input type="text" id="input-descricao" name="input-descricao" class="inputs">
+
+            <label for="input-plataforma">Plataforma</label>
+            <input type="text" id="input-plataforma" name="input-plataforma" class="inputs">
+
+            <label for="input-imgLink">Link da Imagem</label>
+            <input type="text" id="input-imgLink" name="input-imgLink" class="inputs">
+
+            <div id="msg">
+                
+            </div>
+
+            <button id="butao-CriarJogo" class="button" onclick="comporJogo()">Adicionar Jogo</button>
+        </div>
+       
+
+    </div>
+
+    <h1>Lista de Jogos</h1>
+
+    <div id="conteiner-lista">
+        <div id="gameList" class="game-list">
+        </div>
+    </div>
+</body>
+</html>
